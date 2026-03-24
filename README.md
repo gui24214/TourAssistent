@@ -56,17 +56,4 @@ Esta separação permite que os conteúdos possam ser geridos de forma independe
 O TourAssistant encontra-se atualmente em fase de desenvolvimento.
 Nesta fase o foco está na definição da estrutura base do sistema e na criação da arquitetura que permitirá suportar diferentes tipos de experiências de visita.
 
----
-
-## Repositório
-
-Este repositório contém os diferentes componentes necessários para o desenvolvimento do projeto, incluindo a estrutura inicial do sistema e os módulos que irão compor a solução final.
-
-A organização do projeto poderá evoluir ao longo do desenvolvimento.
-
----
-
-## Autor
-
-Projeto desenvolvido no âmbito académico.
     
