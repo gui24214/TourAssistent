@@ -10,7 +10,8 @@ O sistema procura melhorar a forma como as pessoas descobrem e compreendem os es
 
 
 
-## Definição do Sistema
+## Conceito do Sistema do TourAssistant
+
 
 O TourAssistant foi pensado para ser reutilizável em diferentes contextos, não estando limitado a um único tipo de espaço.
 
