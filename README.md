@@ -2,17 +2,17 @@
 
 ## Descrição do Projeto
 
-O **TourAssistant** é um sistema concebido para apoiar a exploração de espaços físicos através de uma aplicação digital que funciona como um assistente de visita.
+O TourAssistant é um sistema concebido para apoiar a exploração de espaços físicos através de uma aplicação digital que funciona como um assistente de visita.
 
 A ideia do projeto é permitir que um utilizador explore um determinado local — como um museu, exposição, espaço histórico — utilizando o seu próprio dispositivo móvel para aceder a informações, conteúdos multimédia e orientação durante a visita.
 
 O sistema procura melhorar a forma como as pessoas descobrem e compreendem os espaços que visitam, fornecendo conteúdos digitais associados aos diferentes pontos de interesse existentes nesses locais.
 
----
 
-## Conceito do Sistema
 
-O TourAssistant foi pensado para ser **reutilizável em diferentes contextos**, não estando limitado a um único tipo de espaço.
+## Definição do Sistema
+
+O TourAssistant foi pensado para ser reutilizável em diferentes contextos, não estando limitado a um único tipo de espaço.
 
 Para tornar o sistema mais flexível, os locais são representados através de uma estrutura composta por três elementos principais:
 
