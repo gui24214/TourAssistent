@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Items.qml</file>
+        <file>ApiHandler.js</file>
+    </qresource>
+</RCC>
