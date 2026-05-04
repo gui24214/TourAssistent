@@ -1,0 +1,461 @@
+import React from 'react';
+
+const COLORS = [
+  { name: 'Preto Principal', hex: '#1a1a1a', usage: 'Texto principal, botões primários, fundo escuro', textColor: '#fff' },
+  { name: 'Dourado Nobre', hex: '#D4AF37', usage: 'Acentos, bordas activas, ícones de destaque, progresso', textColor: '#fff' },
+  { name: 'Branco', hex: '#FFFFFF', usage: 'Fundo geral da aplicação', textColor: '#1a1a1a', border: true },
+  { name: 'Cinzento Suave', hex: '#e5e7eb', usage: 'Bordas, divisores, fundos de input', textColor: '#1a1a1a' },
+  { name: 'Cinzento Texto', hex: '#9ca3af', usage: 'Texto secundário, labels, placeholders', textColor: '#fff' },
+  { name: 'Cinzento Escuro', hex: '#6b7280', usage: 'Texto terciário, descrições curtas', textColor: '#fff' },
+  { name: 'Fundo Creme', hex: '#fafaf9', usage: 'Fundos de cards, painéis, áreas de conteúdo', textColor: '#1a1a1a', border: true },
+  { name: 'Linha Quente', hex: '#f0ece3', usage: 'Divisores suaves, fundos de secção, barra de progresso de áudio', textColor: '#1a1a1a' },
+  { name: 'Dourado Transparente', hex: '#D4AF3715', usage: 'Fundos de hover, highlights de sala activa no mapa', textColor: '#1a1a1a' },
+  { name: 'Azul Profundo', hex: '#1e3a5f', usage: 'Pin B no mapa (colecção secundária)', textColor: '#fff' },
+];
+
+const TYPE_SCALE = [
+  {
+    label: 'Título de Ecrã',
+    font: 'Playfair Display',
+    weight: 600,
+    size: 30,
+    lineHeight: '1.25',
+    color: '#1a1a1a',
+    usage: 'SplashScreen — nome do museu; WelcomeScreen — "Bem-vindo ao Museu Nacional"',
+    sample: 'Museu Nacional',
+  },
+  {
+    label: 'Título de Secção',
+    font: 'Playfair Display',
+    weight: 600,
+    size: 24,
+    lineHeight: '1.3',
+    color: '#1a1a1a',
+    usage: 'FloorPlanScreen — "Piso 0"; GuidedToursListScreen — "Visitas Guiadas"',
+    sample: 'Piso 0 — Arte Moderna',
+  },
+  {
+    label: 'Título de Card / Detalhe',
+    font: 'Playfair Display',
+    weight: 600,
+    size: 22,
+    lineHeight: '1.3',
+    color: '#1a1a1a',
+    usage: 'ArtworkDetailScreen — nome da obra; GuidedTourActiveScreen — título sobreposto na imagem',
+    sample: 'A Anunciação',
+  },
+  {
+    label: 'Título de Card (lista)',
+    font: 'Playfair Display',
+    weight: 600,
+    size: 16,
+    lineHeight: '1.35',
+    color: '#1a1a1a',
+    usage: 'GuidedToursListScreen — título de cada tour card',
+    sample: 'Rota do Renascimento',
+  },
+  {
+    label: 'Subtítulo / Label de Painel',
+    font: 'Playfair Display',
+    weight: 500,
+    size: 18,
+    lineHeight: '1.4',
+    color: '#1a1a1a',
+    usage: 'ArtworkPanel — nome da obra; ArtworkDetailScreen — "Sobre a obra"',
+    sample: 'Sobre a obra',
+  },
+  {
+    label: 'Corpo de Texto',
+    font: 'Inter',
+    weight: 400,
+    size: 14,
+    lineHeight: '1.6',
+    color: '#6b7280',
+    usage: 'Descrições de obras, texto informativo, parágrafos longos',
+    sample: 'Esta obra representa um marco significativo na carreira do artista, explorando temas de identidade e memória.',
+  },
+  {
+    label: 'Texto Secundário / Artista',
+    font: 'Inter',
+    weight: 400,
+    size: 14,
+    lineHeight: '1.5',
+    color: '#9ca3af',
+    usage: 'Nome do artista, data, sala — sob o título da obra',
+    sample: 'Fra Angelico · 1438',
+  },
+  {
+    label: 'Label de Botão',
+    font: 'Inter',
+    weight: 400,
+    size: 14,
+    lineHeight: '1',
+    color: '#ffffff',
+    bg: '#1a1a1a',
+    usage: 'Botões primários e secundários — "Iniciar Visita", "Próximo", "Continuar"',
+    sample: 'Iniciar Visita',
+    isButton: true,
+    tracking: '0.14em',
+  },
+  {
+    label: 'Label Superior / Categoria',
+    font: 'Inter',
+    weight: 400,
+    size: 11,
+    lineHeight: '1',
+    color: '#9ca3af',
+    usage: 'Labels acima de títulos — "Planta do Museu", "Selecione o idioma"; pill de duração',
+    sample: 'Planta do Museu',
+    tracking: '0.18em',
+    upper: true,
+  },
+  {
+    label: 'Metadados / Micro-texto',
+    font: 'Inter',
+    weight: 400,
+    size: 10,
+    lineHeight: '1.5',
+    color: '#9ca3af',
+    usage: 'Etiquetas de metadados (Técnica, Dimensões), timestamps de áudio, legendas do mapa',
+    sample: 'Técnica · Óleo sobre tela · 120 × 95 cm',
+    tracking: '0.12em',
+    upper: true,
+  },
+  {
+    label: 'Texto de Navegação',
+    font: 'Inter',
+    weight: 400,
+    size: 10,
+    lineHeight: '1',
+    color: '#9ca3af',
+    usage: 'Labels da barra de navegação inferior — "Planta", "Visitas", "Explorar", "Perfil"',
+    sample: 'Planta',
+    tracking: '0.18em',
+    upper: true,
+  },
+];
+
+const Section = ({ title, children }) => (
+  <div className="mb-14">
+    <div className="flex items-center gap-3 mb-6">
+      <div className="w-1 h-5 rounded-full" style={{ background: '#D4AF37' }} />
+      <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 20, fontWeight: 600, color: '#1a1a1a' }}>
+        {title}
+      </h2>
+    </div>
+    {children}
+  </div>
+);
+
+const Tag = ({ children, gold }) => (
+  <span
+    className="inline-block px-2 py-0.5 rounded text-xs mr-1.5 mb-1"
+    style={{
+      fontFamily: 'Inter, sans-serif',
+      fontSize: 11,
+      background: gold ? '#D4AF3715' : '#f4f1eb',
+      color: gold ? '#D4AF37' : '#6b7280',
+      border: `1px solid ${gold ? '#D4AF3740' : '#e5e7eb'}`,
+    }}
+  >
+    {children}
+  </span>
+);
+
+export default function DesignGuide() {
+  return (
+    <div style={{ background: '#fff', minHeight: '100vh', fontFamily: 'Inter, sans-serif' }}>
+      {/* Page Header */}
+      <div style={{ background: '#1a1a1a', padding: '48px 40px 40px' }}>
+        <p style={{ fontFamily: 'Inter', fontSize: 11, color: '#D4AF37', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 12 }}>
+          Guia de Design
+        </p>
+        <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 36, fontWeight: 600, color: '#fff', lineHeight: 1.2, marginBottom: 12 }}>
+          Tipografia & Cores
+        </h1>
+        <p style={{ fontFamily: 'Inter', fontSize: 14, color: '#9ca3af', lineHeight: 1.6, maxWidth: 520 }}>
+          Referência visual completa dos estilos tipográficos e paleta de cores usados na aplicação
+          <span style={{ color: '#D4AF37' }}> Museu Nacional</span>.
+          Cada entrada documenta a fonte, peso, tamanho em píxeis e contexto de uso.
+        </p>
+        <div style={{ display: 'flex', gap: 24, marginTop: 24 }}>
+          <div>
+            <p style={{ fontFamily: 'Inter', fontSize: 11, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 4 }}>Fontes</p>
+            <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 15, color: '#fff' }}>Playfair Display</p>
+            <p style={{ fontFamily: 'Inter', fontSize: 15, color: '#D4AF37' }}>Inter</p>
+          </div>
+          <div style={{ width: 1, background: '#ffffff15' }} />
+          <div>
+            <p style={{ fontFamily: 'Inter', fontSize: 11, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 4 }}>Cor de Destaque</p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <div style={{ width: 20, height: 20, borderRadius: 4, background: '#D4AF37' }} />
+              <p style={{ fontFamily: 'Inter', fontSize: 14, color: '#fff' }}>#D4AF37 — Dourado Nobre</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style={{ maxWidth: 900, margin: '0 auto', padding: '48px 24px' }}>
+
+        {/* ── TYPOGRAPHY ───────────────────────────────────── */}
+        <Section title="Escala Tipográfica">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            {TYPE_SCALE.map((t, i) => (
+              <div
+                key={i}
+                style={{
+                  border: '1px solid #e5e7eb',
+                  borderRadius: 16,
+                  overflow: 'hidden',
+                  background: '#fff',
+                  marginBottom: 10,
+                }}
+              >
+                {/* Sample area */}
+                <div
+                  style={{
+                    padding: '28px 28px 24px',
+                    background: t.bg ? t.bg : '#fafaf9',
+                    borderBottom: '1px solid #f0ece3',
+                    minHeight: 80,
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  <p
+                    style={{
+                      fontFamily: `${t.font}, ${t.font === 'Inter' ? 'sans-serif' : 'serif'}`,
+                      fontSize: t.size,
+                      fontWeight: t.weight,
+                      lineHeight: t.lineHeight,
+                      color: t.color,
+                      letterSpacing: t.tracking || 'normal',
+                      textTransform: t.upper ? 'uppercase' : 'none',
+                      margin: 0,
+                      padding: t.isButton ? '14px 28px' : 0,
+                      borderRadius: t.isButton ? 12 : 0,
+                      background: t.isButton ? '#1a1a1a' : 'transparent',
+                      display: t.isButton ? 'inline-block' : 'block',
+                    }}
+                  >
+                    {t.sample}
+                  </p>
+                </div>
+
+                {/* Specs row */}
+                <div
+                  style={{
+                    padding: '14px 20px',
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    alignItems: 'center',
+                    gap: 8,
+                  }}
+                >
+                  {/* Label */}
+                  <span
+                    style={{
+                      fontFamily: 'Inter',
+                      fontSize: 12,
+                      fontWeight: 600,
+                      color: '#1a1a1a',
+                      minWidth: 200,
+                    }}
+                  >
+                    {t.label}
+                  </span>
+
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, flex: 1 }}>
+                    <Tag>{t.font}</Tag>
+                    <Tag gold>{t.size}px</Tag>
+                    <Tag>weight {t.weight}</Tag>
+                    <Tag>line-height {t.lineHeight}</Tag>
+                    {t.tracking && <Tag>tracking {t.tracking}</Tag>}
+                    {t.upper && <Tag>uppercase</Tag>}
+                    <span
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: 6,
+                        padding: '3px 8px',
+                        borderRadius: 6,
+                        border: '1px solid #e5e7eb',
+                        fontSize: 11,
+                        fontFamily: 'Inter',
+                        color: '#6b7280',
+                      }}
+                    >
+                      <span
+                        style={{
+                          display: 'inline-block',
+                          width: 12,
+                          height: 12,
+                          borderRadius: 3,
+                          background: t.color,
+                          border: t.color === '#ffffff' ? '1px solid #e5e7eb' : 'none',
+                          flexShrink: 0,
+                        }}
+                      />
+                      {t.color}
+                    </span>
+                  </div>
+
+                  {/* Usage */}
+                  <p
+                    style={{
+                      width: '100%',
+                      fontFamily: 'Inter',
+                      fontSize: 12,
+                      color: '#9ca3af',
+                      lineHeight: 1.5,
+                      marginTop: 4,
+                      paddingTop: 8,
+                      borderTop: '1px solid #f0ece3',
+                    }}
+                  >
+                    <span style={{ fontWeight: 600, color: '#D4AF37', marginRight: 6 }}>Usado em:</span>
+                    {t.usage}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Section>
+
+        {/* ── COLOUR PALETTE ───────────────────────────────── */}
+        <Section title="Paleta de Cores">
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
+              gap: 12,
+            }}
+          >
+            {COLORS.map((c) => (
+              <div
+                key={c.hex}
+                style={{
+                  border: '1px solid #e5e7eb',
+                  borderRadius: 16,
+                  overflow: 'hidden',
+                  background: '#fff',
+                }}
+              >
+                {/* Colour swatch */}
+                <div
+                  style={{
+                    height: 80,
+                    background: c.hex,
+                    border: c.border ? '1px solid #e5e7eb' : 'none',
+                  }}
+                />
+                {/* Info */}
+                <div style={{ padding: '14px 16px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
+                    <p style={{ fontFamily: 'Inter', fontSize: 13, fontWeight: 600, color: '#1a1a1a' }}>
+                      {c.name}
+                    </p>
+                    <code
+                      style={{
+                        fontFamily: 'monospace',
+                        fontSize: 12,
+                        color: '#D4AF37',
+                        background: '#D4AF3710',
+                        padding: '2px 7px',
+                        borderRadius: 6,
+                        border: '1px solid #D4AF3730',
+                      }}
+                    >
+                      {c.hex}
+                    </code>
+                  </div>
+                  <p style={{ fontFamily: 'Inter', fontSize: 12, color: '#9ca3af', lineHeight: 1.5 }}>
+                    {c.usage}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Section>
+
+        {/* ── FONT FAMILIES SUMMARY ────────────────────────── */}
+        <Section title="Resumo das Famílias de Fontes">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+            {/* Playfair Display */}
+            <div
+              style={{
+                border: '1px solid #e5e7eb',
+                borderRadius: 20,
+                padding: 28,
+                background: '#fafaf9',
+              }}
+            >
+              <p style={{ fontFamily: 'Inter', fontSize: 11, color: '#D4AF37', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 12 }}>
+                Titulos · Serif
+              </p>
+              <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 28, fontWeight: 600, color: '#1a1a1a', lineHeight: 1.2, marginBottom: 8 }}>
+                Playfair Display
+              </p>
+              <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 18, fontStyle: 'italic', color: '#6b7280', marginBottom: 16 }}>
+                "Arte, Cultura & História"
+              </p>
+              <div style={{ borderTop: '1px solid #e5e7eb', paddingTop: 14 }}>
+                <p style={{ fontFamily: 'Inter', fontSize: 12, color: '#9ca3af', lineHeight: 1.6 }}>
+                  Pesos usados: <strong style={{ color: '#1a1a1a' }}>500, 600</strong><br />
+                  Fonte: Google Fonts<br />
+                  Fallbacks: Times New Roman, Georgia, serif
+                </p>
+              </div>
+            </div>
+
+            {/* Inter */}
+            <div
+              style={{
+                border: '1px solid #e5e7eb',
+                borderRadius: 20,
+                padding: 28,
+                background: '#fafaf9',
+              }}
+            >
+              <p style={{ fontFamily: 'Inter', fontSize: 11, color: '#D4AF37', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 12 }}>
+                Corpo · Sans-Serif
+              </p>
+              <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 28, fontWeight: 600, color: '#1a1a1a', lineHeight: 1.2, marginBottom: 8 }}>
+                Inter
+              </p>
+              <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 18, fontWeight: 300, color: '#6b7280', marginBottom: 16 }}>
+                "Legível e Moderno"
+              </p>
+              <div style={{ borderTop: '1px solid #e5e7eb', paddingTop: 14 }}>
+                <p style={{ fontFamily: 'Inter', fontSize: 12, color: '#9ca3af', lineHeight: 1.6 }}>
+                  Pesos usados: <strong style={{ color: '#1a1a1a' }}>300, 400, 500, 600</strong><br />
+                  Fonte: Google Fonts<br />
+                  Fallbacks: system-ui, sans-serif
+                </p>
+              </div>
+            </div>
+          </div>
+        </Section>
+
+        {/* Footer */}
+        <div
+          style={{
+            borderTop: '1px solid #e5e7eb',
+            paddingTop: 24,
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <p style={{ fontFamily: 'Inter', fontSize: 12, color: '#9ca3af' }}>
+            Museu Nacional — Guia de Design
+          </p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#D4AF37' }} />
+            <p style={{ fontFamily: 'Inter', fontSize: 12, color: '#D4AF37' }}>#D4AF37</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

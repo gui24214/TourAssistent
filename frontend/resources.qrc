@@ -1,0 +1,32 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>ApiHandler.js</file>
+        <file>WelcomePage.qml</file>
+        <file>HomePage.qml</file>
+        <file>proto.qml</file>
+        <file>images/pouse.png</file>
+        <file>Tours.qml</file>
+        <file>TourPage.qml</file>
+        <file>guiaLayout</file>
+        <file>fonts/PlayfairDisplay-Medium.ttf</file>
+        <file>fonts/PlayfairDisplay-SemiBold.ttf</file>
+        <file>fonts/Inter_18pt-Medium.ttf</file>
+        <file>fonts/Inter_18pt-Regular.ttf</file>
+        <file>fonts/Inter_24pt-SemiBold.ttf</file>
+        <file>GlobalQrButton.qml</file>
+        <file>ScannerPage.qml</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>images/pouse.png</file>
+        <file>images/PlayButton.png</file>
+        <file>images/clockGold.png</file>
+        <file>images/audioIcon.png</file>
+        <file>images/IconMuseum.png</file>
+        <file>images/headphone.png</file>
+        <file>images/icons8-map-24.png</file>
+        <file>images/qrCode.png</file>
+        <file>images/checkmark.png</file>
+        <file>images/close.png</file>
+    </qresource>
+</RCC>
