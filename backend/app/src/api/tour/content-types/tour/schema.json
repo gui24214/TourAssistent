@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tours",
+  "info": {
+    "singularName": "tour",
+    "pluralName": "tours",
+    "displayName": "Tour"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nameTour": {
+      "type": "string"
+    },
+    "timeTour": {
+      "type": "string"
+    },
+    "descriptionTour": {
+      "type": "text"
+    },
+    "imageTour": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::item.item"
+    },
+    "maps": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::map.map"
+    },
+    "entidade": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::entidade.entidade",
+      "inversedBy": "tours"
+    }
+  }
+}

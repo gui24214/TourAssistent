@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  strapi:
+    build: .
+    container_name: strapi_app
+
+    ports:
+      - "0.0.0.0:1337:1337"
+
+    volumes:
+      - ./app:/app
+      - ./app/node_modules:/app/node_modules
+      - ./backup:/backup
+
+    environment:
+      - NODE_ENV=development
+
+    restart: unless-stopped
+    
